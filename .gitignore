@@ -1,22 +1,25 @@
-# --- Dossiers spécifiques à ignorer ---
-Z_others/
-temp/
-vision_donnees/
-
-# --- MODÈLE KYC (INCLUS POUR LE RECRUTEUR) ---
-# J'ai retiré Model_with_nms_kyc/ d'ici pour qu'il soit uploadé
-Model_Final_KYC/
-Model_Optimized_KYC/
-
-# --- Environnement virtuel et Python ---
+# --- Environnement Virtuel ---
 .venv/
-__pycache__/
-*.pyc
-.idea/
-.vscode/
+venv/
+ENV/
 
-# --- Données et Logs ---
-*.parquet
-*.json
-*.log
+# --- Python / Système ---
+__pycache__/
+*.py[cod]
+*$py.class
 .DS_Store
+Thumbs.db
+
+# --- Dossiers Spécifiques au Projet ---
+A_others/
+data/
+temp/
+
+# --- Modèles IA ---
+# On ignore les dossiers de modèles locaux car ils sont sur Hugging Face
+Model_with_nms_kyc/
+*.bin
+*.safetensors
+
+# --- Docker ---
+.docker/

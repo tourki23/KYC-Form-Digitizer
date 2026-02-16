@@ -1,81 +1,53 @@
-# 📑 KYC Form Digitizer — LayoutLMv3 Deep Learning
+# 📑 Form Digitizer KYC (LayoutLMv3)
 
-[![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-This project is a high-performance **AI Development** solution for automated data extraction from **KYC (Know Your Customer)** forms. It leverages state-of-the-art Deep Learning to transform unstructured document images into validated, structured data.
+This project is a technical demonstration of a Named Entity Recognition (NER) pipeline applied to KYC (Know Your Customer) documents. It leverages deep learning to automate the extraction and structuring of data from printed or handwritten forms.
 
 ---
 
-## 🧠 Model R&D & Methodology
-
-The core engine is a **Fine-Tuned LayoutLMv3** architecture, specifically optimized for complex document understanding.
-
-### 🛠️ Training Logic & AI Pipeline
-* **Supervised Learning**: Fine-tuned on a proprietary dataset of **200 manually annotated forms**.
-* **Multi-modal Input**: The model processes **Text (OCR)**, **Visual Features (RGB)**, and **Spatial Layout (Bounding Boxes)** simultaneously.
-* **Spatial Normalization**: All coordinates are mapped to a $1000 \times 1000$ grid to ensure consistent spatial awareness during inference.
-* **BIO Tagging Schema**: Implements the **BIO (Begin, Inside, Outside)** convention to classify tokens into distinct entities: `QUESTION` and `ANSWER`.
-* **Scientific Evaluation**: Model performance was validated using a **Confusion Matrix** on a dedicated test set, ensuring high reliability for industrial use.
+### 📸 Application Preview
+<p align="center">
+  <img src="screenshots/Demo.png" alt="Application Interface" width="900">
+</p>
 
 ---
 
-## 🌟 Key Features
+## 🧠 AI Model & Fine-Tuning
+The core of the application is built on the **LayoutLMv3** architecture, a state-of-the-art multimodal model that processes text, image, and layout information simultaneously.
 
-### 🧪 Ready-to-Test Dataset
-The repository includes an **`images/`** directory containing **148 test samples** (from `form_0.png` to `form_147.png`).
-* **Quick Demo**: Load these samples directly into the UI to observe extraction accuracy.
-* **Compatibility**: Optimized for digital forms containing **typed text**.
+* **Dataset**: The model was **fine-tuned on a custom dataset of 200 KYC forms**.
+* **Labeling Strategy**: Data was annotated using the **BIO (Begin, Inside, Outside) tagging standard**, ensuring high precision in identifying specific entities like Name, Surname, and Address.
+* **Model Hosting**: The final weights are hosted on the **Hugging Face Hub** ([tourki24/kyc-layoutlmv3-digitizer](https://huggingface.co/tourki24/kyc-layoutlmv3-digitizer)).
+* **MLOps Workflow**: The backend automatically pulls the model weights from the Hub upon the first launch. A Docker volume is utilized for model caching to ensure rapid subsequent startups and minimize network overhead.
 
-### 🖥️ Professional Dashboard
-* **Spatial Reconstruction**: Custom algorithm to logically pair "Question" labels with their corresponding "Answer" fields.
-* **Human-in-the-Loop**: A responsive **Shiny for Python** interface allows users to verify and edit AI predictions in real-time.
-* **Interactive UX**: High-resolution image exploration powered by `Panzoom.js` for precise visual auditing.
+## 🛠️ Technical Stack
+* **AI Framework**: Transformers (Hugging Face), PyTorch.
+* **Inference Engine**: FastAPI (High-performance Backend).
+* **Interface**: Shiny for Python (Reactive Frontend).
+* **OCR**: Tesseract OCR (for bounding box detection).
+* **Containerization**: Docker & Docker Compose (Micro-services architecture).
 
----
+## 🚀 Quick Start
 
-## 🚀 Quick Start (Docker)
+The project is fully containerized for easy deployment. Launch the entire environment with a single command:
 
-The application is fully containerized. The **Model Weights** are included in the image via Git LFS for a "Plug & Play" experience.
-
-### 1. Build the Image
 ```bash
-docker build -t kyc-app .
-2. Run the Container
-No complex volume mounting is required as the model is embedded:
+docker compose up --build
+Once the build is complete:
 
-Bash
-docker run -p 8050:8050 kyc-app
-Access the UI at: http://localhost:8050
+User Interface: Access at http://localhost:8080
 
-🛠️ Technical Stack
-AI Engine: PyTorch, Hugging Face Transformers, LayoutLMv3.
+API Documentation (Swagger): Access at http://localhost:8000/docs
 
-Data Science: Scikit-learn, Numpy, Pandas.
+🧪 How to test?
+For a quick evaluation, a test_images/ directory is included with sample forms:
 
-OCR: Tesseract OCR.
+Open the UI at port 8080.
 
-Web & Deployment: Shiny for Python, Docker, Debian Slim.
+Click "Browse..." and select an image from test_images/.
 
-Version Control: Git LFS (Large File Storage) for model weights.
+Click "Lancer l'Analyse IA" (Run AI Analysis).
 
-✉️ Contact & Developer Info
-This system was developed as part of a specialized AI & Data Science R&D effort.
+The model will automatically extract and populate the fields.
 
-Developer: Mahmoud Tourki
-
-Email: mahmud.tourki24@gmail.com
-
-LinkedIn: https://www.linkedin.com/in/mahmoud-tourki-b228b9147/
-
-
----
-
-### Derniers conseils :
-1. **Sauvegarde** bien ton fichier `README.md`.
-2. **Push** une dernière fois sur ton GitHub :
-   ```bash
-   git add README.md
-   git commit -m "docs: update LinkedIn profile link"
-   git push origin main
+📬 Contact Me
+Developed by Mahmoud Tourki

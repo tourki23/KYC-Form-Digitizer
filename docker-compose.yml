@@ -1,0 +1,31 @@
+services:
+  # Bloc Cerveau (IA + OCR)
+  backend:
+    build: ./backend
+    container_name: kyc-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Stocke le modèle téléchargé sur ton disque pour éviter les téléchargements répétés
+      - hf_cache:/root/.cache/huggingface
+    # Le healthcheck est simplifié pour utiliser python si curl n'est pas là
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/docs')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Bloc Interface (Shiny UI)
+  frontend:
+    build: ./frontend
+    container_name: kyc-frontend
+    ports:
+      - "8080:8080"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_started
+
+volumes:
+  hf_cache:
