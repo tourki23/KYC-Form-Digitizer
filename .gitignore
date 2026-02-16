@@ -1,0 +1,25 @@
+# --- Dossiers spécifiques à ignorer ---
+Z_others/
+temp/
+vision_donnees/
+
+# --- Modèles et Poids (Trop lourds pour GitHub) ---
+Model_with_nms_kyc/
+Model_Final_KYC/
+Model_Optimized_KYC/
+*.safetensors
+*.bin
+*.pth
+
+# --- Environnement virtuel et Python ---
+.venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+
+# --- Données et Logs ---
+*.parquet
+*.json
+*.log
+.DS_Store
