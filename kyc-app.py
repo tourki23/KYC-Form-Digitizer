@@ -15,7 +15,6 @@ if not hasattr(np, "float_"): np.float_ = np.float64
 if not hasattr(np, "int_"): np.int_ = np.int64
 
 # --- 2. RESSOURCES & CONFIGURATION ---
-# Utilisation de os.getcwd() pour garantir que Docker trouve le dossier au bon endroit
 MODEL_PATH = os.path.join(os.getcwd(), "Model_with_nms_kyc")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -30,7 +29,11 @@ def load_resources():
         return None, None
     try:
         processor = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base", apply_ocr=False)
-        model = LayoutLMv3ForTokenClassification.from_pretrained(MODEL_PATH).to(device)
+        # CORRECTION ICI : ignore_mismatched_sizes=True permet de charger tes 7 classes personnalisées
+        model = LayoutLMv3ForTokenClassification.from_pretrained(
+            MODEL_PATH, 
+            ignore_mismatched_sizes=True
+        ).to(device)
         model.eval()
         return processor, model
     except Exception as e:
