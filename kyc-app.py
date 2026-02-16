@@ -42,7 +42,6 @@ PROCESSOR, MODEL = load_resources()
 # --- 3. INTERFACE UTILISATEUR (UI) ---
 app_ui = ui.page_fluid(
     ui.tags.head(
-        # Chargement de Font Awesome pour les icônes
         ui.tags.link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"),
         ui.tags.script(src="https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js"),
         ui.tags.style("""
@@ -54,8 +53,6 @@ app_ui = ui.page_fluid(
             .label-q { color: red; font-weight: bold; margin-bottom: 5px; display: block; }
             .label-r { color: green; font-weight: bold; margin-bottom: 5px; display: block; margin-top: 10px; }
             .field-box { margin-bottom: 20px; padding: 10px; border: 1px solid #eee; border-radius: 5px; }
-            
-            /* Style du Footer corrigé */
             .footer { text-align: center; padding: 25px; margin-top: 40px; border-top: 1px solid #e0e0e0; background-color: #f9f9f9; color: #444; width: 100%; }
             .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
             .footer-links a { color: #0077b5; text-decoration: none; font-weight: 500; display: flex; align-items: center; }
@@ -92,7 +89,6 @@ app_ui = ui.page_fluid(
             width=1/2
         )
     ),
-    # Footer Section Corrigée
     ui.div(
         ui.div("Developed by Mahmoud Tourki", style="font-weight: bold; margin-bottom: 10px;"),
         ui.div(
@@ -104,7 +100,7 @@ app_ui = ui.page_fluid(
             ui.tags.a(
                 ui.tags.i(class_="fa-brands fa-linkedin"), 
                 "MAHMOUD TOURKI", 
-                href="https://www.linkedin.com/in/mahmoud-tourki-016489121/", 
+                href="https://www.linkedin.com/in/mahmoud-tourki-b228b9147/", 
                 target="_blank"
             ),
             class_="footer-links"
@@ -113,7 +109,7 @@ app_ui = ui.page_fluid(
     )
 )
 
-# --- 4. SERVEUR ---
+# (Le reste du serveur est identique à ton code précédent)
 def server(input, output, session):
     results_lines = reactive.Value([])
 

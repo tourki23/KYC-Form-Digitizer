@@ -3,13 +3,10 @@ Z_others/
 temp/
 vision_donnees/
 
-# --- Modèles et Poids (Trop lourds pour GitHub) ---
-Model_with_nms_kyc/
+# --- MODÈLE KYC (INCLUS POUR LE RECRUTEUR) ---
+# J'ai retiré Model_with_nms_kyc/ d'ici pour qu'il soit uploadé
 Model_Final_KYC/
 Model_Optimized_KYC/
-*.safetensors
-*.bin
-*.pth
 
 # --- Environnement virtuel et Python ---
 .venv/
