@@ -15,8 +15,8 @@ if not hasattr(np, "float_"): np.float_ = np.float64
 if not hasattr(np, "int_"): np.int_ = np.int64
 
 # --- 2. RESSOURCES & CONFIGURATION ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "Model_with_nms_kyc")
+# Utilisation de os.getcwd() pour garantir que Docker trouve le dossier au bon endroit
+MODEL_PATH = os.path.join(os.getcwd(), "Model_with_nms_kyc")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 if platform.system() == "Windows":
@@ -109,7 +109,6 @@ app_ui = ui.page_fluid(
     )
 )
 
-# (Le reste du serveur est identique à ton code précédent)
 def server(input, output, session):
     results_lines = reactive.Value([])
 

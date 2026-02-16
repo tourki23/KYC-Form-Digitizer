@@ -1,7 +1,7 @@
 # Utilisation d'une image Python légère
 FROM python:3.11-slim
 
-# 1. Installation des dépendances système
+# 1. Installation des dépendances système (Optimisée avec suppression du cache)
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libgl1 \
@@ -15,14 +15,15 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Copie du code de l'application (On garde le nom original)
+# 4. Copie du code de l'application
+# On garde le nom original kyc-app.py pour la cohérence des chemins
 COPY kyc-app.py .
 
-# 5. Copie du dossier modèle (Assure-toi qu'il est au même niveau que le Dockerfile)
+# 5. Copie du dossier modèle (Poids Git LFS inclus)
 COPY Model_with_nms_kyc/ ./Model_with_nms_kyc/
 
 # 6. Exposition du port Shiny
 EXPOSE 8050
 
-# 7. Commande de lancement (Cible le bon fichier)
+# 7. Commande de lancement
 CMD ["shiny", "run", "--host", "0.0.0.0", "--port", "8050", "kyc-app.py"]
